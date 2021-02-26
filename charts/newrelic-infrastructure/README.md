@@ -50,7 +50,7 @@ This chart will deploy the New Relic Infrastructure agent as a Daemonset.
 | `schedulerEndpointUrl`         | Explicitly sets the scheduler component url.                                                                                                                                                                                                      |                                 |
 | `controllerManagerEndpointUrl` | Explicitly sets the controller manager component url.                                                                                                                                                                                             |                                 |
 | `eventQueueDepth`              | Increases the in-memory cache of the agent to accommodate for more samples at a time. | |
-| `enableProcessMetrics`         | Enables the sending of process metrics to New Relic.  | `false` |
+| `enableProcessMetrics`         | Enables the sending of process metrics to New Relic.  | `(empty)` (Account default<sup>1</sup>) |
 | `global.nrStaging` - `nrStaging` | Send data to staging (requires a staging license key). | `false` |
 | `discoveryCacheTTL`            | Duration since the discovered endpoints are stored in the cache until they expire. Valid time units: 'ns', 'us', 'ms', 's', 'm', 'h' | `1h` |
 | `windowsOsList` | List of `windowsOs` to be monitored, for each object specified it will creat a different daemonset for the specified Windows version. | [{"version":2004,"imageTag":"2.2.0-windows-2004-alpha","buildNumber":"10.0.19041"}] |
@@ -61,6 +61,11 @@ This chart will deploy the New Relic Infrastructure agent as a Daemonset.
 | `openshift.version` | OpenShift version for witch enable specific configuration options. Values supported ["3.x","4.x"]. For 4.x it includes OpenShift specific Control Plane endpoints and CRI-O runtime |  |
 | `runAsUser` | Set when running in unprivileged mode or when hitting UID constraints in OpenShift. | `1000` |
 | `daemonSet.annotations`   | The annotations to add to the `DaemonSet`.
+
+> 1: Depending on the creation date of the account the behaviour is different
+> Accounts and subaccounts created before July 20, 2020 will report, by default, process metrics unless this config option is explicitely set to "false".
+> On the other hand New Relic accounts created after July 20, 2020 will **not** send, by default, any process metrics unless this config option is explicitely set to "true".
+> [Additional information](https://docs.newrelic.com/docs/release-notes/infrastructure-release-notes/infrastructure-agent-release-notes/new-relic-infrastructure-agent-1120)
 
 ## Example
 
