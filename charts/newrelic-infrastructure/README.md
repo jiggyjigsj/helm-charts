@@ -62,11 +62,11 @@ This chart will deploy the New Relic Infrastructure agent as a Daemonset.
 | `runAsUser` | Set when running in unprivileged mode or when hitting UID constraints in OpenShift. | `1000` |
 | `daemonSet.annotations`   | The annotations to add to the `DaemonSet`.
 
-> 1: Depending on the creation date of the account the behaviour is different
-> Accounts and subaccounts created before July 20, 2020 will report, by default, process metrics unless this config option is explicitely set to "false".
-> On the other hand New Relic accounts created after July 20, 2020 will **not** send, by default, any process metrics unless this config option is explicitely set to "true".
+> 1: Default value will depend on the creation date of the account owning the specified License Key:
+> * Accounts and subaccounts created before July 20, 2020 will report, by default, process metrics unless this config option is explicitely set to `false`. This is done to respect the old default behavior of the Infrastructure Agent.
+> * New Relic accounts created after July 20, 2020 will **not** send, by default, any process metrics unless this config option is explicitely set to `true`.
+> 
 > [Additional information](https://docs.newrelic.com/docs/release-notes/infrastructure-release-notes/infrastructure-agent-release-notes/new-relic-infrastructure-agent-1120)
-
 ## Example
 
 Make sure you have [added the New Relic chart repository.](../../README.md#installing-charts)
